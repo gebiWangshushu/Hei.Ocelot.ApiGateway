@@ -7,7 +7,7 @@ using Ocelot.Administration;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
-namespace Hei.ApiGateway.Ocelot
+namespace Hei.Ocelot.ApiGateway
 {
     public class Startup
     {
@@ -32,8 +32,12 @@ namespace Hei.ApiGateway.Ocelot
                     //.AddKubernetes()
                     .AddAdministration("/administration", options =>
                     {
-                        options.Authority = "http://passport-test.39.net";
-                        options.ApiName = "api1";
+                        //options.Authority = "http://passport-test.39.net";
+                        //options.ApiName = "api1";
+
+                        options.Authority = "http://localhost:5100";
+                        options.ApiName = "ocelot";
+
                         options.RequireHttpsMetadata = false;
                         options.SupportedTokens = SupportedTokens.Both;
                         options.ApiSecret = "secret";

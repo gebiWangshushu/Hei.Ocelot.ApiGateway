@@ -29,14 +29,25 @@ namespace Hei.IdentityServer
                 // m2m client credentials flow client
                 new Client
                 {
-                    ClientId = "m2m.client",
+                    ClientId = "ocelot.client",
                     ClientName = "Client Credentials Client",
 
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
+                    ClientSecrets = { new Secret("secret".Sha256()) },
 
-                    AllowedScopes = { "ocelot.admin" }
+                    AllowedScopes = { "ocelot.admin" },
+                    AccessTokenLifetime=7200
                 },
+            };
+
+        public static IEnumerable<ApiResource> ApiResources =>
+            new ApiResource[]
+            {
+                new ApiResource
+                { 
+                    Name="ocelot",
+                    Scopes=new string[]{ "ocelot.admin" }
+                }
             };
     }
 }

@@ -6,16 +6,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["Hei.ApiGateway.Ocelot/Hei.ApiGateway.Ocelot.csproj", "Hei.ApiGateway.Ocelot/"]
-RUN dotnet restore "Hei.ApiGateway.Ocelot/Hei.ApiGateway.Ocelot.csproj"
+COPY ["Hei.Ocelot.ApiGateway/Hei.Ocelot.ApiGateway.csproj", "Hei.Ocelot.ApiGateway/"]
+RUN dotnet restore "Hei.Ocelot.ApiGateway/Hei.Ocelot.ApiGateway.csproj"
 COPY . .
-WORKDIR "/src/Hei.ApiGateway.Ocelot"
-RUN dotnet build "Hei.ApiGateway.Ocelot.csproj" -c Release -o /app/build
+WORKDIR "/src/Hei.Ocelot.ApiGateway"
+RUN dotnet build "Hei.Ocelot.ApiGateway.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Hei.ApiGateway.Ocelot.csproj" -c Release -o /app/publish
+RUN dotnet publish "Hei.Ocelot.ApiGateway.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Hei.ApiGateway.Ocelot.dll"]
+ENTRYPOINT ["dotnet", "Hei.Ocelot.ApiGateway.dll"]

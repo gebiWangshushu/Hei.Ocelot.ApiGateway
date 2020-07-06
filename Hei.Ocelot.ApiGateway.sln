@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Api", "Hei.Api\Hei.Api.csproj", "{8BBF5AF4-6B23-4E46-BBCA-E3EB728BF90F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hei.ApiGateway.Ocelot", "Hei.ApiGateway.Ocelot\Hei.ApiGateway.Ocelot.csproj", "{0019D0DA-874A-450F-BDC4-10680B83DA94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hei.Ocelot.ApiGateway", "Hei.Ocelot.ApiGateway\Hei.Ocelot.ApiGateway.csproj", "{0019D0DA-874A-450F-BDC4-10680B83DA94}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.IdentityServer", "Hei.IdentityServer\Hei.IdentityServer.csproj", "{51C52806-F525-41E3-A9E8-11B53C2385CB}"
 EndProject
