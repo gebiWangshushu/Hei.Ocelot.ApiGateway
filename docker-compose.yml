@@ -1,0 +1,45 @@
+﻿version: '3.4'
+
+services:
+  hei.ocelot.apigateway:
+    image: ${DOCKER_REGISTRY-}hei-ocelot-apigateway
+    build:
+      context: .
+      dockerfile: Hei.Ocelot.ApiGateway/Dockerfile
+    environment:
+        ASPNETCORE_ENVIRONMENT:
+    depends_on:
+      - hei.api
+      - hei.identityserver
+    expose:
+      - "80"
+      - "5000"
+    ports:
+      - "5000:80"
+
+# test identityserver£¬you can use your own
+  hei.identityserver:
+    image: ${DOCKER_REGISTRY-}hei-ocelot-identityserver
+    build:
+      context: .
+      dockerfile: Hei.IdentityServer/Dockerfile
+    environment:
+        ASPNETCORE_ENVIRONMENT:
+    depends_on:
+      - hei.api
+    expose:
+      - "80"
+    ports:
+      - "5100:80"
+
+  hei.api:
+    image: ${DOCKER_REGISTRY-}hei-ocelot-api
+    build:
+      context: .
+      dockerfile: Hei.Api/Dockerfile
+    environment:
+        ASPNETCORE_ENVIRONMENT:
+    expose:
+      - "80"
+    ports:
+      - "5003:80"

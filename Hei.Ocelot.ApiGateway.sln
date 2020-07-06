@@ -5,9 +5,16 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Api", "Hei.Api\Hei.Api.csproj", "{8BBF5AF4-6B23-4E46-BBCA-E3EB728BF90F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hei.Ocelot.ApiGateway", "Hei.Ocelot.ApiGateway\Hei.Ocelot.ApiGateway.csproj", "{0019D0DA-874A-450F-BDC4-10680B83DA94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.Ocelot.ApiGateway", "Hei.Ocelot.ApiGateway\Hei.Ocelot.ApiGateway.csproj", "{0019D0DA-874A-450F-BDC4-10680B83DA94}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hei.IdentityServer", "Hei.IdentityServer\Hei.IdentityServer.csproj", "{51C52806-F525-41E3-A9E8-11B53C2385CB}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{BEEEB09E-0AA1-4F12-B54A-C0630926FE13}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{9CA58074-9881-449A-BDD6-9519A9F89855}"
+	ProjectSection(SolutionItems) = preProject
+		deploy.yml = deploy.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +34,10 @@ Global
 		{51C52806-F525-41E3-A9E8-11B53C2385CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51C52806-F525-41E3-A9E8-11B53C2385CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51C52806-F525-41E3-A9E8-11B53C2385CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEEEB09E-0AA1-4F12-B54A-C0630926FE13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEEEB09E-0AA1-4F12-B54A-C0630926FE13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEEEB09E-0AA1-4F12-B54A-C0630926FE13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEEEB09E-0AA1-4F12-B54A-C0630926FE13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

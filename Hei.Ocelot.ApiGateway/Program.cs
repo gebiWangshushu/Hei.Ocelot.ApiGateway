@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Ocelot.Middleware;
 using Ocelot.DependencyInjection;
 
-namespace Hei.ApiGateway.Ocelot
+namespace Hei.Ocelot.ApiGateway
 {
     public class Program
     {

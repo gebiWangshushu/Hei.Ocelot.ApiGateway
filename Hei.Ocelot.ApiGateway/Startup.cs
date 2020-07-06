@@ -28,19 +28,16 @@ namespace Hei.Ocelot.ApiGateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var identityOptions = Configuration.GetSection("AddAdministration")?.Get<IdentityServerAuthenticationOptions>();
             services.AddOcelot(Configuration)
                     //.AddKubernetes()
-                    .AddAdministration("/administration", options =>
+                    .AddAdministration(Configuration.GetValue<string>("AddAdministration:Path")?? "/administration", options =>
                     {
-                        //options.Authority = "http://passport-test.39.net";
-                        //options.ApiName = "api1";
-
-                        options.Authority = "http://localhost:5100";
-                        options.ApiName = "ocelot";
-
-                        options.RequireHttpsMetadata = false;
                         options.SupportedTokens = SupportedTokens.Both;
-                        options.ApiSecret = "secret";
+                        options.Authority = identityOptions.Authority;
+                        options.ApiName = identityOptions.ApiName;
+                        options.RequireHttpsMetadata = identityOptions.RequireHttpsMetadata;
+                        options.ApiSecret = identityOptions.ApiSecret;
                     });
         }
 
