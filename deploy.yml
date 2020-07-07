@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
  name: aspnetcore
 
-# hei-ocelot-api
+#************** hei-ocelot-api ************* #
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -22,7 +22,7 @@ spec:
   spec:
    containers:
     - name: hei-ocelot-api
-      image: 172.16.1.31:5000/hei-ocelot-k8s:v13k8sfixed
+      image: gebiwangshushu/hei-ocelot-api:1.0
       ports:
        - containerPort: 80
 
@@ -37,22 +37,86 @@ spec:
  ports:
   - port: 80
     targetPort: 80
-    nodePort: 35003
+    nodePort: 31003
  selector:
   app: hei-ocelot-api
 
+#************** hei-ocelot-identityserver ************* #
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: hei-ocelot-identityserver
+ namespace: aspnetcore
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   app: hei-ocelot-identityserver
+ template:
+  metadata:
+   labels:
+    app: hei-ocelot-identityserver
+  spec:
+   containers:
+    - name: hei-ocelot-identityserver
+      image: gebiwangshushu/hei-ocelot-identityserver:1.0
+      ports:
+       - containerPort: 80
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+ name: hei-ocelot-identityserver
+ namespace: aspnetcore
+spec:
+ type: NodePort
+ ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31100
+ selector:
+  app: hei-ocelot-identityserver
 
 
-# hei-ocelot-identityserver
-
-
-# hei-ocelot-apigateway
+#************** hei-ocelot-apigateway ************* #
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: hei-ocelot-apigateway 
+ namespace: aspnetcore
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   app: hei-ocelot-apigateway 
+ template:
+  metadata:
+   labels:
+    app: hei-ocelot-apigateway 
+  spec:
+   containers:
+    - name: hei-ocelot-apigateway 
+      image: gebiwangshushu/hei-ocelot-apigateway:1.0
+      ports:
+       - containerPort: 80
+      volumeMounts:
+       - name: hei-ocelot-apigateway
+         mountPath: "/app/config"
+         readOnly: true
+   volumes:
+    - name: hei-ocelot-apigateway
+      configMap:
+       name: hei-ocelot-apigateway
 
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: service-configmap
+  name: hei-ocelot-apigateway
+  namespace: aspnetcore
 data:
   appsettings.yml: |
     Logging:
@@ -68,3 +132,18 @@ data:
         ApiName: ocelot
         RequireHttpsMetadata: false
         ApiSecret: secret
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+ name: hei-ocelot-apigateway 
+ namespace: aspnetcore
+spec:
+ type: NodePort
+ ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31500
+ selector:
+  app: hei-ocelot-apigateway 
