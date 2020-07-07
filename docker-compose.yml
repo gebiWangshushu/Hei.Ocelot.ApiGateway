@@ -12,10 +12,11 @@ services:
       - hei.api
       - hei.identityserver
     expose:
-      - "80"
-      - "5000"
+      - "80"     
     ports:
       - "5000:80"
+    volumes:
+      - /home/source/Hei.Ocelot.ApiGateway/Hei.Ocelot.ApiGateway:/app/config
 
 # test identityserver£¬you can use your own
   hei.identityserver:

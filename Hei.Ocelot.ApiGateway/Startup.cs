@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Ocelot.Administration;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using System;
+using System.IO;
 
 namespace Hei.Ocelot.ApiGateway
 {
@@ -16,7 +18,7 @@ namespace Hei.Ocelot.ApiGateway
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
+                .SetBasePath(Path.Combine(env.ContentRootPath, "config"))
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile("ocelot.json")
@@ -28,7 +30,8 @@ namespace Hei.Ocelot.ApiGateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var identityOptions = Configuration.GetSection("AddAdministration")?.Get<IdentityServerAuthenticationOptions>();
+            var identityOptions = Configuration.GetSection("AddAdministration:IdentityServer")?.Get<IdentityServerAuthenticationOptions>();
+            Console.WriteLine($"Authority:{identityOptions.Authority}");
             services.AddOcelot(Configuration)
                     //.AddKubernetes()
                     .AddAdministration(Configuration.GetValue<string>("AddAdministration:Path")?? "/administration", options =>

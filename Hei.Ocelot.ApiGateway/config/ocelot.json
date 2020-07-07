@@ -10,7 +10,6 @@
           "Port": 5003
         }
       ],
-
       "UpstreamHttpMethod": [ "Get" ]
     }
   ],
