@@ -1,0 +1,13 @@
+﻿Logging:
+  LogLevel:
+    Default: Information
+    Microsoft: Warning
+    Microsoft.Hosting.Lifetime: Information
+AllowedHosts: '*'
+AddAdministration:
+  Path: /administration
+  IdentityServer:
+    Authority: 'http://172.16.3.117:5100'
+    ApiName: ocelot
+    RequireHttpsMetadata: false
+    ApiSecret: secret

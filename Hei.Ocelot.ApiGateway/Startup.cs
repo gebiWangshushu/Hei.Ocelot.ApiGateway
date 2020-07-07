@@ -19,8 +19,8 @@ namespace Hei.Ocelot.ApiGateway
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Path.Combine(env.ContentRootPath, "config"))
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddYamlFile("appsettings.yml", optional: false, reloadOnChange: true)
+                .AddYamlFile($"appsettings.{env.EnvironmentName}.yml", optional: true, reloadOnChange: true)
                 .AddJsonFile("ocelot.json")
                 .AddJsonFile($"ocelot.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
             Configuration = builder.Build();

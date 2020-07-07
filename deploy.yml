@@ -37,11 +37,34 @@ spec:
  ports:
   - port: 80
     targetPort: 80
-    nodePort: 31000
+    nodePort: 35003
  selector:
   app: hei-ocelot-api
+
+
 
 # hei-ocelot-identityserver
 
 
 # hei-ocelot-apigateway
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: service-configmap
+data:
+  appsettings.yml: |
+    Logging:
+      LogLevel:
+        Default: Information
+        Microsoft: Warning
+        Microsoft.Hosting.Lifetime: Information
+    AllowedHosts: '*'
+    AddAdministration:
+      Path: /administration
+      IdentityServer:
+        Authority: 'http://172.16.3.117:5100'
+        ApiName: ocelot
+        RequireHttpsMetadata: false
+        ApiSecret: secret
