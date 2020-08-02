@@ -16,7 +16,7 @@ services:
     ports:
       - "5000:80"
     volumes:
-      - /home/source/Hei.Ocelot.ApiGateway/Hei.Ocelot.ApiGateway:/app/config
+      - /home/heidemo/config:/app/config
 
 # test identityserver£¬you can use your own
   hei.identityserver:

@@ -21,13 +21,11 @@ namespace Hei.Ocelot.ApiGateway
                 .SetBasePath(Path.Combine(env.ContentRootPath, "config"))
                 .AddYamlFile("appsettings.yml", optional: false, reloadOnChange: true)
                 .AddYamlFile($"appsettings.{env.EnvironmentName}.yml", optional: true, reloadOnChange: true)
-                .AddJsonFile("ocelot.json")
-                .AddJsonFile($"ocelot.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
-            Configuration = builder.Build();
+                .AddYamlFile("ocelot.yml")
+                .AddYamlFile($"ocelot.{env.EnvironmentName}.yml", optional: true, reloadOnChange: true);
+            Configuration = builder.AddConfiguration(configuration).Build();
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             var identityOptions = Configuration.GetSection("AddAdministration:IdentityServer")?.Get<IdentityServerAuthenticationOptions>();
@@ -44,7 +42,6 @@ namespace Hei.Ocelot.ApiGateway
                     });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseOcelot().Wait();
