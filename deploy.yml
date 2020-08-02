@@ -99,8 +99,7 @@ spec:
   spec:
    containers:
     - name: hei-ocelot-apigateway 
-      #image: gebiwangshushu/hei-ocelot-apigateway:1.0
-      image: 172.16.1.31:5000/hei-ocelot-apigateway:1.1
+      image: gebiwangshushu/hei-ocelot-apigateway:1.1
       ports:
        - containerPort: 80
       volumeMounts:
