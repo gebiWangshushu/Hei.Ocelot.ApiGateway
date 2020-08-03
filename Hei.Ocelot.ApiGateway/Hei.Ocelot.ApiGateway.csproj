@@ -17,6 +17,9 @@
     <PackageReference Include="NetEscapades.Configuration.Yaml" Version="2.0.1" />
     <PackageReference Include="Ocelot" Version="16.0.1" />
     <PackageReference Include="Ocelot.Administration" Version="16.0.1" />
+    <PackageReference Include="Ocelot.Provider.Consul" Version="16.0.1" />
+    <PackageReference Include="Ocelot.Provider.Eureka" Version="16.0.1" />
+    <PackageReference Include="Ocelot.Provider.Kubernetes" Version="16.0.1" />
 
   </ItemGroup>
 

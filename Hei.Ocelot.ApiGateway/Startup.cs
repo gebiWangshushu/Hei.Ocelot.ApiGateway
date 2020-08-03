@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Ocelot.Administration;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
+using Ocelot.Provider.Eureka;
 using System;
 using System.IO;
 
@@ -27,19 +29,34 @@ namespace Hei.Ocelot.ApiGateway
         }
 
         public void ConfigureServices(IServiceCollection services)
-        {
+        {            
+            var ocelot = services.AddOcelot(Configuration);
+
+            //add Administration
             var identityOptions = Configuration.GetSection("AddAdministration:IdentityServer")?.Get<IdentityServerAuthenticationOptions>();
-            Console.WriteLine($"Authority:{identityOptions.Authority}");
-            services.AddOcelot(Configuration)
-                    //.AddKubernetes()
-                    .AddAdministration(Configuration.GetValue<string>("AddAdministration:Path")?? "/administration", options =>
-                    {
-                        options.SupportedTokens = SupportedTokens.Both;
-                        options.Authority = identityOptions.Authority;
-                        options.ApiName = identityOptions.ApiName;
-                        options.RequireHttpsMetadata = identityOptions.RequireHttpsMetadata;
-                        options.ApiSecret = identityOptions.ApiSecret;
-                    });
+            ocelot.AddAdministration(Configuration.GetValue<string>("AddAdministration:Path")?? "/administration", options =>
+            {
+                options.SupportedTokens = SupportedTokens.Both;
+                options.Authority = identityOptions.Authority;
+                options.ApiName = identityOptions.ApiName;
+                options.RequireHttpsMetadata = identityOptions.RequireHttpsMetadata;
+                options.ApiSecret = identityOptions.ApiSecret;
+            });
+
+            if ("Consul".Equals(Configuration["GlobalConfiguration:ServiceDiscoveryProvider:Type"],StringComparison.InvariantCultureIgnoreCase))
+            {
+                ocelot.AddConsul();
+            }
+
+            if ("Eureka".Equals(Configuration["GlobalConfiguration:ServiceDiscoveryProvider:Type"], StringComparison.InvariantCultureIgnoreCase))
+            {
+                ocelot.AddEureka();
+            }
+
+            if ("kube".Equals(Configuration["GlobalConfiguration:ServiceDiscoveryProvider:Type"], StringComparison.InvariantCultureIgnoreCase))
+            {
+                ocelot.AddKubernetesFixed();
+            }
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
