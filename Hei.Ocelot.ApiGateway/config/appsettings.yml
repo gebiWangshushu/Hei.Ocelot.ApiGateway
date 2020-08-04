@@ -4,15 +4,25 @@
     Microsoft: Warning
     Microsoft.Hosting.Lifetime: Information
 AllowedHosts: '*'
-AddAdministration:
+CorsOrigins: 
+ - http://hei-ocelot.com
+ - https://hei-ocelot.com #https
+ - http://hei-ocelot.com:9000
+ - http://www.hei-ocelot.com 
+Administration:
   Path: /administration
   IdentityServer:
-    Authority: 'http://172.16.3.117:5100'
+    Authority: http://172.16.3.117:5100
     ApiName: ocelot
     RequireHttpsMetadata: false
     ApiSecret: secret
-eureka:
-  client:
-    serviceUrl: 'http://localhost:8761/eureka/'
-    shouldRegisterWithEureka: false
-    shouldFetchRegistry: true
+Eureka:
+  Client:
+    ServiceUrl: http://localhost:8761/eureka/
+    ShouldRegisterWithEureka: false
+    ShouldFetchRegistry: true
+IdentityProvider:
+  #- Authority: http://172.16.3.117:5100
+  #  ApiName: HeiApi
+  #  ApiSecret: secret
+  #  RequireHttpsMetadata: false
