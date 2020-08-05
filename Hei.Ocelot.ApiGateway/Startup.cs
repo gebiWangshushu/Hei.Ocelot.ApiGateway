@@ -77,7 +77,7 @@ namespace Hei.Ocelot.ApiGateway
 
             //add route Authentication
             var idProviders = Configuration.GetSection("IdentityProvider")?.Get<List<IdentityServerAuthenticationOptions>>();
-            if (idProviders.Count > 0)
+            if (idProviders?.Count > 0)
             {
                 var authBuilder = services.AddAuthentication();
                 foreach (var p in idProviders)
@@ -103,7 +103,7 @@ namespace Hei.Ocelot.ApiGateway
             }
 
             var idProviders = Configuration.GetSection("IdentityProvider")?.Get<List<IdentityServerAuthenticationOptions>>();
-            if (idProviders.Count > 0)
+            if (idProviders?.Count > 0)
             {
                 app.UseAuthentication();
             }

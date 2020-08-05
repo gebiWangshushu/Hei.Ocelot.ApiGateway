@@ -21,7 +21,7 @@ Eureka:
     ServiceUrl: http://localhost:8761/eureka/
     ShouldRegisterWithEureka: false
     ShouldFetchRegistry: true
-IdentityProvider:
+#IdentityProvider:
   #- Authority: http://172.16.3.117:5100
   #  ApiName: HeiApi
   #  ApiSecret: secret
