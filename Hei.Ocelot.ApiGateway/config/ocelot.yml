@@ -14,6 +14,6 @@ GlobalConfiguration:
     Host: 172.16.3.119
     Port: 8500
     Type: Consul
-  #add ServiceDiscoveryProvider Consul(all so near add eureka section in appsetting.yml)
+  #add ServiceDiscoveryProvider Consul(also need to add eureka section in appsetting.yml)
   #ServiceDiscoveryProvider:
   #  Type: Eureka
